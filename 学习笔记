@@ -1,0 +1,8 @@
+创建样式：
+创建layout.blade.php,把需要用到的样式全部导入到里面，可以填充的内容使用@yield('content')，
+'content'可以写成别的字符串，但是要匹配相应内容
+
+引用样式：
+@extends('layouts.layout') //文件名，不需要加blade.php
+@section('content') //匹配@yield()括号内内容
+@endsection
