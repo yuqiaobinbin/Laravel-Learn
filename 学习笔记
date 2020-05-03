@@ -21,3 +21,7 @@ foreach
 @extends('layouts.layout') //文件名，不需要加blade.php
 @section('content') //匹配@yield()括号内内容
 @endsection
+
+图片
+<img src="/img/pizza-house.jpg" alt="logo"/>
+注意public下的文件是只需要/就可以
