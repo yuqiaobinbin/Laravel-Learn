@@ -1,3 +1,18 @@
+foreach
+-----------------------------------------------------------
+@foreach($pizzas as $pizza)
+    <div>
+       {{ $loop->index }} {{ $pizza['type'] }}
+        @if($loop->first)
+            <span>-first in the list</span>
+            @endif
+        @if($loop->last)
+            <span>-last in the list</span>
+        @endif
+    </div>
+@endforeach
+----------------------------------------------------------
+
 创建样式：
 创建layout.blade.php,把需要用到的样式全部导入到里面，可以填充的内容使用@yield('content')，
 'content'可以写成别的字符串，但是要匹配相应内容
