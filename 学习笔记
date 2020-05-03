@@ -25,3 +25,7 @@ foreach
 图片
 <img src="/img/pizza-house.jpg" alt="logo"/>
 注意public下的文件是只需要/就可以
+
+get方式(?name=---)
+$name = request('name');
+    return view('name' => $name]);
