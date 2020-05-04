@@ -56,9 +56,11 @@ php artisan serve
 
 
 
-migrate（may be used to create tables)
-php artisan make:migration create_pizzas_table
-In directory: database/migrations/2020----- has a file
+**migrate（may be used to create tables)**
+introduction
+migrate:fresh  Drop all
+1. php artisan make:migration create_pizzas_table
+2. In directory: database/migrations/2020----- has a file
 Add something to it ！
 -----------
 $table->id();
@@ -67,5 +69,11 @@ $table->string('type');
 $table->string('base');
 $table->string('name');
 -----------
-php artisan migrate //begin to migrate
-
+3. php artisan migrate //begin to migrate
+4. php artisan migrate:status //show the status
+5. if you want to add one column
+    ①不好的方法
+    php artisan migrate:rollback //回溯
+    php artisan migrate //创建
+    ②比较好的方法
+   
