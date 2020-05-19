@@ -368,3 +368,164 @@ protected $casts = [
                 @endforeach
         </ul>
 ```
+
+## 删除
+
+show.blade.php
+```
+<form action="/pizzas/{{ $pizza->id }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button>Complete Order</button>
+        </form>
+```
+route->web.php
+```
+Route::delete('/pizzas/{id}','PizzaController@destroy');
+```
+PizzaController
+```
+public function destroy($id){
+        $pizza = Pizza::findOrFail($id);
+        $pizza->delete();
+
+        return redirect('/pizzas');
+    }
+```
+
+
+## sass
+
+安装node.js
+
+npm 安装
+```
+npm install
+```
+
+在webpack.mix.js文件夹当中修改代码如下
+```
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/main.scss','public/css');
+```
+> 这意味着从resources/sass/main.scss  =>=> public/css
+
+> 注意不要多加分号
+
+编译scss(从resources/sass/目录到->public/css)
+```
+npm run dev
+```
+
+如果有更新scss,执行并修改文件，他就会自动编译
+```
+npm run watch
+```
+
+> scss教程参考别的
+
+
+
+
+## 身份验证
+
+安装laravel/ui
+```
+composer require laravel/ui
+```
+
+php使用ui(这里会报错，解决方案在下面)
+```
+php artisan ui vue --auth
+npm install
+npm run dev
+```
+
+ui报错解决方案
+
+1. 创建一个 1G 大小的文件
+```
+/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+```
+2. 格式化该文件
+```
+/sbin/mkswap /var/swap.1
+```
+3. 将该文件挂载至文件系统中
+```
+/sbin/swapon /var/swap.1
+```
+
+此时，resources/view有auth的view
+
+route/web.php下有一条新路由
+
+app/http/controllers有新的控制器
+
+统一布局，修改引入文件
+
+@extends('layouts.app')
+
+## 设置权限
+
+在route中设置验证
+```
+Route::get('/pizzas','PizzaController@index')->middleware('auth');
+```
+
+如果要保护所有的路由，可以在控制器中设置
+```
+public function __construct()
+    {
+        $this->middleware('auth');
+    }
+```
+
+## 去除注册界面
+
+查看所有路由
+```
+ php artisan route:list
+ ```
+
+ 路由
+ ```
+ Auth::routes([
+    'register' => false
+]);
+```
+这是因为 app.blade.php有如下语句 
+```
+@if (Route::has('register'))
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+    </li>
+@endif
+```
+
+重命名路由
+```
+Route::get('/pizzas','PizzaController@index')->name('pizzas.index')->middleware('auth');
+```
+这样，使用如下语句就可以调用
+```
+{{ route('pizza.index') }}
+```
+如果后面有参数
+```
+{{ route('pizza.index'，$pizza->id) }}
+```
+
+简易创建
+
+| model | controller | migration |
+|  ----   | ----  |      ---- |
+| Pizza  | PizzaController | create_pizzas_table |
+| Kebab  | KebabController | create_Kebabs_table |
+
+
+```
+ php artisan make:model Kebab -mc
+
+```
