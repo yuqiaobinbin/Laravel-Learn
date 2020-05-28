@@ -1,3 +1,11 @@
+## 访问路由提前工作
+apache配置文件
+```
+LoadModule rewrite_module modules/mod_rewrite.so
+```
+所有 AllowOverride  None 改成 AllowOverride  All
+
+
 ## foreach
 ```
 @foreach($pizzas as $pizza)
@@ -397,6 +405,20 @@ public function destroy($id){
 ## sass
 
 安装node.js
+```
+# wget https://nodejs.org/dist/v10.9.0/node-v10.9.0-linux-x64.tar.xz    // 下载
+
+# tar xf  node-v10.9.0-linux-x64.tar.xz       // 解压
+
+# cd node-v10.9.0-linux-x64/                  // 进入解压目录
+
+# ./bin/node -v                               // 执行node命令 查看版本
+
+ln -s bin/npm /usr/local/bin/
+
+ln -s bin/node /usr/local/bin/
+
+```
 
 npm 安装
 ```
